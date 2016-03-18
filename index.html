@@ -22,15 +22,7 @@ $.getJSON("https://cdn.rawgit.com/mayotunde/url/gh-pages/poly.geojson", function
 
 
  
-L.geoJson(data, {onEachFeature,
-style: function(feature, layer){
-var fillColor, p = feature.properties.CODE;
-if (p > 800) fillColor = '#FED976'; 
-else if (p > 500) fillColor = '#ae7';
-else if (p > 100) fillColor = '#e9b50b';
-return {color:'black', fillColor: fillColor, fillOpacity: 0.35};
-}, onEachFeature: function(feature, layer){layer.bindPopup(feature.properties.CODE) 
-}}).addTo(map);
+L.geoJson(data).addTo(map);
 }); 
 </script>
 </body>
