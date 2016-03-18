@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Loading Geojson polygon features from an external URL</title>
+<link rel="stylesheet" href="
+http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> 
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
+</head>
+<body>
+<div id="map" style="width: 600px;height: 400px"></div>
+<script>
+var map = L.map('map').setView([14.6, 2.9], 5);
+mapLink = '<a href="
+http://openstreetmap.org">openstreetmap</a>,'+
+'<a href="http://mapsnigeriainitiative.wordpress.com">mapsnigeriainitiative</a>';
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: ' &copy; ' + mapLink,maxZoom: 18}).addTo(map); 
+
+
+$.getJSON("poly.geojson", function(data){
+
+
+ 
+L.geoJson(data, {onEachFeature,
+style: function(feature, layer){
+var fillColor, p = feature.properties.CODE;
+if (p > 800) fillColor = '#FED976'; 
+else if (p > 500) fillColor = '#ae7';
+else if (p > 100) fillColor = '#e9b50b';
+return {color:'black', fillColor: fillColor, fillOpacity: 0.35};
+}, onEachFeature: function(feature, layer){layer.bindPopup(feature.properties.CODE) 
+}}).addTo(map);
+}); 
+</script>
+</body>
+</html>
